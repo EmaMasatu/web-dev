@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Sidebar</title>
+    <style>
+        body{
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        /* SIDEBAR POSITION */
+        .sidebar{
+            background-color: #f1f1f1;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0;
+            min-width: 300px;
+        }
+        .sidebar__content{
+            padding: 8px;
+        }
+
+        /* SIDEBAR HIDDEN STATE */
+        .sidebar[aria-hidden="true"]{
+            transition: 200ms;
+            transform: translateX(100%);
+        }
+
+        /* SIDEBAR VISIBLE STATE */
+        .sidebar:not([aria-hidden]),
+        .sidebar[aria-hidden="false"]{
+            transition: 200ms;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar1" class="sidebar" aria-label="Main sidebar containing navigation links and some information" aria-hidden="true">
+        <div class="sidebar__content">
+            <span>Sidebar Content</span>
+        </div>
+    </div>
+
+    <button data-toggle-sidebar="sidebar1">Toggle Sidebar</button>
+
+    <script>
+        document.querySelectorAll('[data-toggle-sidebar]').forEach(toggle => {
+            toggle.addEventListener('click', e => {
+                const sidebarID = toggle.dataset.toggleSidebar;
+                const sidebarElement = sidebarID ? document.getElementById(sidebarID) : undefined;
+                
+                if (sidebarElement){
+                    let sidebarState = sidebarElement.getAttribute('aria-hidden');
+                    sidebarElement.setAttribute('aria-hidden',
+                    sidebarState == 'true' ? false : true);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
