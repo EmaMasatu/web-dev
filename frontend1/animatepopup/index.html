@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup 2</title>
+    <style>
+        /*the modal (background)*/
+        .modal{
+            display: none;
+            /*hidden by default*/
+            position: fixed; /*stay in place*/
+            z-index: 1; /*sit on top*/
+            left: 0;
+            top: 0;
+            width: 100%; /*full width*/
+            height: 100%; /*full height*/
+            overflow: auto; /*enable scroll if needed*/
+            background-color: rgb(0, 0, 0); /*fallback color*/
+            background-color: rgba(0, 0, 0, .4); /*black w/ opacity*/
+        }
+
+        /*modal content/box */
+        .modal-content{
+            background-color: #fefefe;
+            margin: 15% auto; /*15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /*could be more or less, depending on screen size */
+        }
+
+        /*the close buttton */
+        .close{
+            color: rgb(42, 23, 124);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus{
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Modal Header */
+        .modal-header{
+            padding: 2px 16px;
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        /*Modal Body*/
+        .modal-body{
+            padding: 2px 16px;
+        }
+
+        /*modal footer */
+        .modal-footer{
+            padding: 2px 16px;
+            background-color: #5cb8;
+            color: white;
+        }
+
+        /*modal content*/
+        .modal-content{
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),
+                        0 6px 20px 0 rgba(0,0,0,0.19);
+            animation-name: animatetop;
+            animation-duration: .4s;
+        }
+
+        /*add animation */
+        @keyframes animatetop{
+            from{
+                top: -300px;
+                opacity: 0;
+            }
+            to{
+                top: 0;
+                opacity: 1;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <!--Trigger/Open The Modal-->
+    <button id="myBtn">Click to Open</button>
+
+    <!--The Modal-->
+    <div id="myModal" class="modal">
+
+        <!--Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>HUDUMA Surface</h2>
+            </div>
+
+            <div class="modal-body">
+                <p>This is where the huduma happens</p>
+                <p>Prepare for the best...</p>
+            </div>
+
+            <div class="modal-footer">
+                <h3>Hope You Have a Good Time</h3>
+            </div>
+            
+            
+        </div>
+
+    </div>
+
+    <script>
+        
+        var modal = document.getElementById("myModal"); // get the modal
+        var btn = document.getElementById("myBtn"); // get the button that opens the modal
+        var span = document.getElementsByClassName("close")[0]; // get the <span> element that closes the modal
+
+        // when the user clicks on the button, open the modal
+        btn.onclick = function(){
+            modal.style.display = "block";
+        }
+
+        // when the user clicks on <span> (x), close the modal
+        span.onclick = function(){
+            modal.style.display = "none"
+        }
+
+        // when the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event){
+            if(event.target == modal){
+                modal.style.display = "none";
+            }
+        }
+
+    </script>
+</body>
+</html>
