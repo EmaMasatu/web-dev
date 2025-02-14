@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Reservations Bubble Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        canvas {
+            max-width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h2>Hotel Reservations & Payments</h2>
+    <canvas id="bubbleChart"></canvas>
+
+    <script>
+        const ctx = document.getElementById('bubbleChart').getContext('2d');
+        
+        const data = {
+            datasets: [
+                {
+                    label: 'Hotel Reservations',
+                    data: [
+                        { x: 50, y: 2000, r: 15 }, // 50 reservations, $2000 total payment, $1500 credit
+                        { x: 30, y: 1500, r: 10 },
+                        { x: 70, y: 3500, r: 25 },
+                        { x: 40, y: 2200, r: 12 },
+                        { x: 90, y: 4000, r: 30 }
+                    ],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        const config = {
+            type: 'bubble',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let dataPoint = context.raw;
+                                return `Reservations: ${dataPoint.x}, Payment: $${dataPoint.y}, Credit: $${dataPoint.r * 100}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Number of Reservations'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Total Payment Amount ($)'
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(ctx, config);
+    </script>
+</body>
+</html>
